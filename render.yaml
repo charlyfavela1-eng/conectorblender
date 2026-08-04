@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: conectorblender
+    env: node
+    plan: free
+    buildCommand: npm install
+    # blender-app.js crea la app y escucha. blender-server.js tambien arranca si
+    # lo llaman directo, asi que cualquiera de los dos sirve como Start Command.
+    startCommand: node blender-app.js
+    healthCheckPath: /salud
+    envVars:
+      - key: CLAUDE_KEY
+        sync: false
+      # PORT lo inyecta Render; fijarlo a mano se pelea con lo que asigna.
